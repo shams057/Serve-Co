@@ -8,35 +8,35 @@ const services = [
     icon: Sparkles,
     title: "House Cleaning",
     description: "Deep cleaning, regular maintenance, or one-time refresh",
-    price: "From $60",
+    price: "From 60DT",
     href: "/services#cleaning",
   },
   {
     icon: Shirt,
     title: "Laundry & Ironing",
     description: "Wash, dry, fold, and professional ironing services",
-    price: "From $30",
+    price: "From 30DT",
     href: "/services#laundry",
   },
   {
     icon: PawPrint,
     title: "Pet Grooming",
     description: "Bathing, grooming, and pampering for your furry friends",
-    price: "From $45",
+    price: "From 45DT",
     href: "/services#pet",
   },
   {
     icon: Car,
     title: "Car Washing",
     description: "Interior and exterior detailing at your location",
-    price: "From $35",
+    price: "From 35DT",
     href: "/services#car",
   },
   {
     icon: Baby,
     title: "Babysitting",
     description: "Trusted caregivers for your little ones",
-    price: "From $25/hr",
+    price: "From 25DT/hr",
     href: "/services#babysitting",
   },
 ]
@@ -46,7 +46,7 @@ export function ServicesPreview() {
     <section className="py-20 lg:py-28 bg-secondary/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground mb-4">Our Services</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground   mb-4">Our Services</h2>
           <p className="text-muted-foreground text-lg">
             Everything you need to keep your home running smoothly, all in one place.
           </p>
