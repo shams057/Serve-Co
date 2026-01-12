@@ -19,11 +19,52 @@ import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 
 const services = [
-  { value: "cleaning", label: "House Cleaning" },
-  { value: "laundry", label: "Laundry & Ironing" },
-  { value: "pet", label: "Pet Grooming" },
-  { value: "car", label: "Car Washing" },
-  { value: "babysitting", label: "Babysitting" },
+  {
+    value: "cleaning",
+    label: "House Cleaning",
+    packages: [
+      { id: "basic", name: "Basic Clean", price: 75 },
+      { id: "standard", name: "Standard Clean", price: 125 },
+      { id: "deep", name: "Deep Clean", price: 200 },
+    ],
+  },
+  {
+    value: "laundry",
+    label: "Laundry & Ironing",
+    packages: [
+      { id: "wash", name: "Wash & Dry", price: 45 },
+      { id: "iron", name: "Wash, Dry & Iron", price: 75 },
+      { id: "delicate", name: "Delicate Fabrics", price: 85 },
+    ],
+  },
+  {
+    value: "pet",
+    label: "Pet Grooming",
+    packages: [
+      { id: "bath", name: "Bath & Dry", price: 55 },
+      { id: "trim", name: "Bath, Trim & Style", price: 95 },
+      { id: "full", name: "Full Grooming Package", price: 135 },
+    ],
+  },
+  {
+    value: "car",
+    label: "Car Washing",
+    packages: [
+      { id: "exterior", name: "Exterior Wash", price: 40 },
+      { id: "interior", name: "Interior Clean", price: 50 },
+      { id: "full", name: "Full Detail", price: 100 },
+      { id: "premium", name: "Premium Detail + Wax", price: 150 },
+    ],
+  },
+  {
+    value: "babysitting",
+    label: "Babysitting",
+    packages: [
+      { id: "hourly", name: "Hourly Rate", price: 20 },
+      { id: "evening", name: "Evening (5+ hours)", price: 95 },
+      { id: "fullday", name: "Full Day (8+ hours)", price: 160 },
+    ],
+  },
 ]
 
 const timeSlots = [
@@ -48,6 +89,7 @@ function BookingFormContent() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     service: preselectedService,
+    package: "",
     date: undefined as Date | undefined,
     time: "",
     name: "",
@@ -69,8 +111,11 @@ function BookingFormContent() {
     setIsSubmitted(true)
   }
 
-  const isStep1Valid = formData.service && formData.date && formData.time
+  const isStep1Valid = formData.service && formData.package && formData.date && formData.time
   const isStep2Valid = formData.name && formData.phone && formData.address
+
+  const selectedService = services.find((s) => s.value === formData.service)
+  const selectedPackage = selectedService?.packages.find((p) => p.id === formData.package)
 
   if (isSubmitted) {
     return (
@@ -80,9 +125,12 @@ function BookingFormContent() {
             <CheckCircle2 className="w-8 h-8 text-primary" />
           </div>
           <h2 className="font-serif text-2xl font-bold text-foreground mb-4">Booking Confirmed!</h2>
+          <p className="text-muted-foreground mb-2">
+            Thank you, {formData.name}! Your {selectedService?.label} - {selectedPackage?.name} has been booked for{" "}
+            {formData.date && format(formData.date, "MMMM d, yyyy")} at {formData.time}.
+          </p>
           <p className="text-muted-foreground mb-6">
-            Thank you, {formData.name}! Your {services.find((s) => s.value === formData.service)?.label} service has
-            been booked for {formData.date && format(formData.date, "MMMM d, yyyy")} at {formData.time}.
+            Total: <span className="font-semibold text-foreground">${selectedPackage?.price}</span>
           </p>
           <p className="text-sm text-muted-foreground mb-8">
             You'll receive a confirmation email shortly with all the details.
@@ -93,6 +141,7 @@ function BookingFormContent() {
               setStep(1)
               setFormData({
                 service: "",
+                package: "",
                 date: undefined,
                 time: "",
                 name: "",
@@ -116,7 +165,6 @@ function BookingFormContent() {
           <CardTitle className="font-serif text-2xl">Book a Service</CardTitle>
           <span className="text-sm text-muted-foreground">Step {step} of 3</span>
         </div>
-        {/* Progress Bar */}
         <div className="flex gap-2">
           {[1, 2, 3].map((i) => (
             <div
@@ -128,14 +176,13 @@ function BookingFormContent() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
-          {/* Step 1: Service & Schedule */}
           {step === 1 && (
             <div className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="service">Select Service</Label>
                 <Select
                   value={formData.service}
-                  onValueChange={(value) => setFormData({ ...formData, service: value })}
+                  onValueChange={(value) => setFormData({ ...formData, service: value, package: "" })}
                 >
                   <SelectTrigger id="service">
                     <SelectValue placeholder="Choose a service" />
@@ -149,6 +196,33 @@ function BookingFormContent() {
                   </SelectContent>
                 </Select>
               </div>
+
+              {selectedService && (
+                <div className="space-y-2">
+                  <Label htmlFor="package">Select Package</Label>
+                  <div className="grid gap-3">
+                    {selectedService.packages.map((pkg) => (
+                      <div
+                        key={pkg.id}
+                        className={cn(
+                          "p-4 border-2 rounded-lg cursor-pointer transition-all",
+                          formData.package === pkg.id
+                            ? "border-primary bg-primary/5"
+                            : "border-muted hover:border-primary/50",
+                        )}
+                        onClick={() => setFormData({ ...formData, package: pkg.id })}
+                      >
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-semibold text-foreground">{pkg.name}</p>
+                          </div>
+                          <p className="text-lg font-bold text-primary">{pkg.price}TND</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-2">
                 <Label>Select Date</Label>
@@ -195,7 +269,6 @@ function BookingFormContent() {
             </div>
           )}
 
-          {/* Step 2: Contact Details */}
           {step === 2 && (
             <div className="space-y-6">
               <div className="space-y-2">
@@ -232,7 +305,6 @@ function BookingFormContent() {
             </div>
           )}
 
-          {/* Step 3: Review & Notes */}
           {step === 3 && (
             <div className="space-y-6">
               <div className="bg-muted/50 rounded-lg p-4 space-y-3">
@@ -240,7 +312,15 @@ function BookingFormContent() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Service:</span>
-                    <span className="text-foreground">{services.find((s) => s.value === formData.service)?.label}</span>
+                    <span className="text-foreground">{selectedService?.label}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Package:</span>
+                    <span className="text-foreground">{selectedPackage?.name}</span>
+                  </div>
+                  <div className="flex justify-between border-t border-muted pt-2">
+                    <span className="text-muted-foreground">Price:</span>
+                    <span className="text-foreground font-bold text-primary">${selectedPackage?.price}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Date:</span>
@@ -278,7 +358,6 @@ function BookingFormContent() {
             </div>
           )}
 
-          {/* Navigation */}
           <div className="flex justify-between mt-8">
             {step > 1 ? (
               <Button type="button" variant="outline" onClick={handleBack}>

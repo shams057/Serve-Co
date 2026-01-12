@@ -16,20 +16,20 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "hello@serveandco.com",
+    value: "contact@serveandco.com",
     href: "mailto:hello@serveandco.com",
   },
   {
     icon: Phone,
     title: "Phone",
-    value: "(555) 123-4567",
-    href: "tel:+15551234567",
+    value: "+216 90062010",
+    href: "tel:+21690062010",
   },
   {
     icon: MapPin,
-    title: "Service Area",
-    value: "San Francisco Bay Area",
-    href: null,
+    title: "Ariana, Tunisia",
+    value: "Ariana Soghra, 2088",
+    href: "https://www.google.com/maps/search/?api=1&query=ZI+Chotrana+I+BP4+Parc+Technologique+El+Ghazela,+Ariana+2088",
   },
 ]
 
@@ -150,7 +150,7 @@ export default function ContactPage() {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="(555) 123-4567"
+                          placeholder="+216 90062010"
                         />
                       </div>
 

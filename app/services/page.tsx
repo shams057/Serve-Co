@@ -15,17 +15,17 @@ const services = [
     packages: [
       {
         name: "Standard Clean",
-        price: "$60",
+        price: "60DT",
         features: ["2-3 bedrooms", "Bathroom cleaning", "Kitchen cleaning", "Vacuuming & mopping"],
       },
       {
         name: "Deep Clean",
-        price: "$120",
+        price: "120DT",
         features: ["All standard features", "Inside appliances", "Window cleaning", "Baseboards & details"],
       },
       {
         name: "Move In/Out",
-        price: "$180",
+        price: "180DT",
         features: ["Complete deep clean", "Cabinet interiors", "Closet cleaning", "Wall spot cleaning"],
       },
     ],
@@ -39,17 +39,17 @@ const services = [
     packages: [
       {
         name: "Wash & Fold",
-        price: "$30",
+        price: "30DT",
         features: ["Up to 10 lbs", "Sorted by color", "Fresh folded", "Same-day available"],
       },
       {
         name: "Wash & Iron",
-        price: "$50",
+        price: "50DT",
         features: ["Up to 10 lbs", "Professional ironing", "Hung or folded", "Stain treatment"],
       },
       {
         name: "Premium Care",
-        price: "$80",
+        price: "80DT",
         features: ["Delicates included", "Hand wash items", "Specialty care", "Premium packaging"],
       },
     ],
@@ -61,13 +61,13 @@ const services = [
     description: "Keep your furry friends looking and feeling their best.",
     image: "/cute-dog-getting-groomed-happy-pet-grooming.jpg",
     packages: [
-      { name: "Basic Groom", price: "$45", features: ["Bath & dry", "Brush out", "Nail trim", "Ear cleaning"] },
+      { name: "Basic Groom", price: "45DT", features: ["Bath & dry", "Brush out", "Nail trim", "Ear cleaning"] },
       {
         name: "Full Groom",
-        price: "$75",
+        price: "75DT",
         features: ["Basic + haircut", "Style of choice", "Teeth brushing", "Cologne/bow"],
       },
-      { name: "Spa Day", price: "$100", features: ["Full groom", "De-shedding", "Paw treatment", "Skin treatment"] },
+      { name: "Spa Day", price: "100DT", features: ["Full groom", "De-shedding", "Paw treatment", "Skin treatment"] },
     ],
   },
   {
@@ -77,15 +77,15 @@ const services = [
     description: "Mobile car detailing that comes to you.",
     image: "/car-detailing-washing-professional-service.jpg",
     packages: [
-      { name: "Express Wash", price: "$35", features: ["Exterior wash", "Wheel cleaning", "Windows", "Tire shine"] },
+      { name: "Express Wash", price: "35DT", features: ["Exterior wash", "Wheel cleaning", "Windows", "Tire shine"] },
       {
         name: "Interior Detail",
-        price: "$65",
+        price: "65DT",
         features: ["Vacuum interior", "Dashboard clean", "Seat cleaning", "Air freshener"],
       },
       {
         name: "Full Detail",
-        price: "$120",
+        price: "120DT",
         features: ["Interior + exterior", "Wax application", "Leather care", "Engine cleaning"],
       },
     ],
@@ -99,17 +99,17 @@ const services = [
     packages: [
       {
         name: "Standard Care",
-        price: "$25/hr",
+        price: "25DT/hr",
         features: ["1-2 children", "Meal preparation", "Light cleanup", "Activity time"],
       },
       {
         name: "Extended Care",
-        price: "$30/hr",
+        price: "30DT/hr",
         features: ["Up to 3 children", "Homework help", "Bedtime routine", "Status updates"],
       },
       {
         name: "Overnight",
-        price: "$200",
+        price: "200DT",
         features: ["8+ hours", "Morning routine", "Breakfast included", "Flexible timing"],
       },
     ],
